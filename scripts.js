@@ -77,4 +77,5 @@ window.onload = function(){
             level4()
         }
     }
+    document.addEventListener('touchstart', level4) 
 }
