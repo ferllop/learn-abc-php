@@ -76,6 +76,15 @@ window.onload = function(){
         if(e.keyCode == 32){
             level4()
         }
+        if(e.keyCode == 115){
+            let words = document.querySelector('.flex-container')
+            if (words.style.display === 'none') {
+                words.style.display = 'flex'
+            } else {
+                words.style.display = 'none'
+            }
+        }
     }
+
     document.addEventListener('touchstart', level4) 
 }

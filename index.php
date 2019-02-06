@@ -11,6 +11,10 @@
     <div class="flex-container">
         <div id="word"></div>
     </div>
+    <form action="" method="POST">
+    	<textarea rows="20" cols="20" name="words" placeholder="Escribe aquí tus palabras"></textarea>
+    	<input type="submit" value="Enviar">
+    </form>
     <script type="text/javascript" src="scripts.js"></script>
 </body>
 </html>
