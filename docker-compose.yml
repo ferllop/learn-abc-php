@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+    php:
+        image: custom-php
+        build: ./docker/php
+        ports:
+            - 80:80
+        volumes:
+            - ./app/src:/var/www/html
