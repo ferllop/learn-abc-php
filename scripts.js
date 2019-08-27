@@ -5,9 +5,11 @@ const level1 = () => {
     let wordsArray = ['a', 'e', 'i', 'o', 'u']
     let wordIndex1 = null
 
-    do {
+    do 
+    {
         wordIndex1 = Math.floor((Math.random() * (wordsArray.length)) + 0)
-    } while (wordIndex1 == prevIndex)
+    } 
+    while (wordIndex1 == prevIndex)
 
     document.getElementById('word').innerText = wordsArray[wordIndex1].toUpperCase()
         prevIndex = wordIndex1
@@ -17,9 +19,12 @@ const level2a = () => {
     let wordsArray = ['a', 'e', 'i', 'o', 'u']
     let wordIndex1 = null
     let wordIndex2 = null
-    do {
+    
+    do 
+    {
         wordIndex1 = Math.floor((Math.random() * (wordsArray.length)) + 0)
-    } while (wordIndex1 == prevIndex)
+    } 
+    while (wordIndex1 == prevIndex)
 
     wordIndex2 = Math.floor((Math.random() * (wordsArray.length)) + 0)
 
@@ -31,9 +36,11 @@ const level2b = () => {
     let wordsArray = ['a', 'e', 'i', 'o', 'u']
     let wordIndex1 = null
     let wordIndex2 = null
-    do {
+    do 
+    {
         wordIndex1 = Math.floor((Math.random() * (wordsArray.length)) + 0)
-    } while (wordIndex1 == prevIndex)
+    } 
+    while (wordIndex1 == prevIndex)
 
     wordIndex2 = Math.floor((Math.random() * (wordsArray.length)) + 0)
 
@@ -63,20 +70,26 @@ const level4 = () => {
         ]
     let wordIndex1 = null
 
-    do {
+    do 
+    {
         wordIndex1 = Math.floor((Math.random() * (wordsArray.length)) + 0)
-    } while (wordIndex1 == prevIndex)
+    }
+    while (wordIndex1 == prevIndex)
 
     document.getElementById('word').innerText = wordsArray[wordIndex1].toUpperCase()
-        prevIndex = wordIndex1
+    prevIndex = wordIndex1
 }
 
 window.onload = function(){
     document.onkeydown = function(e){
-        if(e.keyCode == 32){
+        const SPACE_KEY = 32
+        const F4_KEY = 115
+
+        if (e.keyCode === SPACE_KEY){
             level4()
         }
-        if(e.keyCode == 115){
+
+        if(e.keyCode == F4_KEY){
             let words = document.querySelector('.flex-container')
             if (words.style.display === 'none') {
                 words.style.display = 'flex'
