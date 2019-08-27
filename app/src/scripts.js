@@ -1,95 +1,20 @@
 'use strict'
-let prevIndex = null
-
-const level1 = () => {
-    let wordsArray = ['a', 'e', 'i', 'o', 'u']
-    let wordIndex1 = null
-
-    do 
-    {
-        wordIndex1 = Math.floor((Math.random() * (wordsArray.length)) + 0)
-    } 
-    while (wordIndex1 == prevIndex)
-
-    document.getElementById('word').innerText = wordsArray[wordIndex1].toUpperCase()
-        prevIndex = wordIndex1
-}
-
-const level2a = () => {
-    let wordsArray = ['a', 'e', 'i', 'o', 'u']
-    let wordIndex1 = null
-    let wordIndex2 = null
-    
-    do 
-    {
-        wordIndex1 = Math.floor((Math.random() * (wordsArray.length)) + 0)
-    } 
-    while (wordIndex1 == prevIndex)
-
-    wordIndex2 = Math.floor((Math.random() * (wordsArray.length)) + 0)
-
-    document.getElementById('word').innerText = wordsArray[wordIndex1].toUpperCase() + '___' + wordsArray[wordIndex2].toUpperCase()
-        prevIndex = wordIndex1
-}
-
-const level2b = () => {
-    let wordsArray = ['a', 'e', 'i', 'o', 'u']
-    let wordIndex1 = null
-    let wordIndex2 = null
-    do 
-    {
-        wordIndex1 = Math.floor((Math.random() * (wordsArray.length)) + 0)
-    } 
-    while (wordIndex1 == prevIndex)
-
-    wordIndex2 = Math.floor((Math.random() * (wordsArray.length)) + 0)
-
-    document.getElementById('word').innerText = wordsArray[wordIndex1].toUpperCase() + wordsArray[wordIndex2].toUpperCase()
-        prevIndex = wordIndex1
-}
-
-const level3 = () => {
-    let wordsArray = ['si', 'no', 'yo', 'tu', 'el']
-    let wordIndex1 = null
-
-    do {
-        wordIndex1 = Math.floor((Math.random() * (wordsArray.length)) + 0)
-    } while (wordIndex1 == prevIndex)
-
-    document.getElementById('word').innerText = wordsArray[wordIndex1].toUpperCase()
-        prevIndex = wordIndex1
-}
-
-const level4 = () => {
-    let wordsArray = [
-        'mesa', 'luna', 'gato', 'sol', 
-        'moto', 'pera', 'cama', 'bebe', 
-        'casa', 'nana', 'nino', 'malo', 
-        'cara', 'pelo', 'te', 'ta',
-        'ra', 're','mi','ma','sa',
-        ]
-    let wordIndex1 = null
-
-    do 
-    {
-        wordIndex1 = Math.floor((Math.random() * (wordsArray.length)) + 0)
-    }
-    while (wordIndex1 == prevIndex)
-
-    document.getElementById('word').innerText = wordsArray[wordIndex1].toUpperCase()
-    prevIndex = wordIndex1
-}
 
 window.onload = function(){
-    document.onkeydown = function(e){
+    const selectedLevel = level3
+    const separator = null
+
+    let prevIndex = null
+    
+    document.addEventListener('keydown', event => {
         const SPACE_KEY = 32
         const F4_KEY = 115
 
-        if (e.keyCode === SPACE_KEY){
-            level4()
+        if (event.keyCode === SPACE_KEY){
+            prevIndex = getWord(selectedLevel, prevIndex, separator)
         }
 
-        if(e.keyCode == F4_KEY){
+        if(event.keyCode === F4_KEY){
             let words = document.querySelector('.flex-container')
             if (words.style.display === 'none') {
                 words.style.display = 'flex'
@@ -97,7 +22,48 @@ window.onload = function(){
                 words.style.display = 'none'
             }
         }
-    }
+    })
 
-    document.addEventListener('touchstart', level4) 
+    document.addEventListener('touchstart', () => getWord(selectedLevel)) 
 }
+
+function getWord(wordsList, wordListIndexToAvoid, separator = null)
+{    
+    let firstWordIndex = null
+    let secondWordIndex = null
+
+    do 
+    {
+        firstWordIndex = Math.floor((Math.random() * (wordsList.length)) + 0)
+    } 
+    while (firstWordIndex === wordListIndexToAvoid)
+
+    secondWordIndex = Math.floor((Math.random() * (wordsList.length)) + 0)
+
+    const firstWord = wordsList[firstWordIndex].toUpperCase()
+    const secondWord = wordsList[secondWordIndex].toUpperCase()
+
+    document.getElementById('word').innerText = constructWord(firstWord, secondWord, separator)
+    return firstWordIndex
+}
+
+function constructWord(firstWord, secondWord, separator){
+    if (separator) {
+        return firstWord + separator + secondWord
+    } else {
+        return firstWord
+    }
+}
+
+
+const level1 = ['a', 'e', 'i', 'o', 'u']
+
+const level2 = ['si', 'no', 'yo', 'tu', 'el']
+
+const level3 = [
+    'mesa', 'luna', 'gato', 'sol', 
+    'moto', 'pera', 'cama', 'bebe', 
+    'casa', 'nana', 'nino', 'malo', 
+    'cara', 'pelo', 'te', 'ta',
+    'ra', 're','mi','ma','sa',
+]
